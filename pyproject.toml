@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tmp"
+version = "0.1.0"
+description = ""
+authors = ["Akitan <92628099+MarquisLim@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^4.1.7"
+requests = "^2.28.2"
+pillow = "^9.4.0"
+djangorestframework = "^3.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
