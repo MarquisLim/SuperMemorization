@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Card.apps.CardConfig',
     'rest_framework',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
