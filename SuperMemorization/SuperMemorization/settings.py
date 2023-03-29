@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--!b=8^f$zbm6u(ube@7$3)e%+=n4v^n%ys*90+&#4iw=tql%%(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['marquislim2.pythonanywhere.com',]
 
 
 # Application definition
@@ -120,9 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = '/home/marquislim2/SuperMemorization/SuperMemorization/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = '/home/marquislim2/SuperMemorization/SuperMemorization/media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
