@@ -12,6 +12,7 @@ requests = "^2.28.2"
 pillow = "^9.4.0"
 djangorestframework = "^3.14.0"
 django-filter = "^23.1"
+django-cors-headers = "^3.14.0"
 
 
 [build-system]
