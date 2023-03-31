@@ -9,10 +9,11 @@
       {% for name in names %}
         <li>
           {% if name|slice:":1" == "n" %}
-              {{ name|slice:"0:1"|upper }}{{ name|slice:"1:" }}
+              {{  name|capfirst }}
           {% else %}
               {{ name }}
           {% endif %}
+
         </li>
       {% endfor %}
     </ul>
