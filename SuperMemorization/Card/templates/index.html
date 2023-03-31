@@ -5,6 +5,7 @@
 </head>
 <body>
 	<div class="container">
+    <h3>Names</h3>
     <a href="{% url 'about' %}">About page</a>
     <ul>
       {% for name in names %}
@@ -18,6 +19,15 @@
         </li>
       {% endfor %}
     </ul>
+
+    <h3>Decks</h3>
+    <div class="decks">
+      <ul>
+        {% for deck in decks %}
+            <li>{{ deck }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </body>
 </html>

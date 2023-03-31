@@ -5,9 +5,7 @@ from .serializers import *
 from rest_framework.views import APIView
 from .filters import UsersFitler
 from django_filters import rest_framework as rest_filters
-from django.urls import path
 from django.shortcuts import render
-from . import views
 from django_filters.rest_framework import DjangoFilterBackend
 
 class CardAPIView(APIView):
@@ -91,9 +89,11 @@ class DecksOfUser(generics.ListAPIView):
 def index(request):
     title = 'Home page'
     names = ['damir', 'nurzhan', 'farhat', 'ivan', 'vladimir', 'elena', 'nikolay']
+    decks = Deck.objects.all()
     context = {
         'title': title,
-        'names': names
+        'names': names,
+        'decks': decks
     }
     return render(request, 'index.html', context)
 
