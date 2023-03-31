@@ -90,6 +90,10 @@ class DecksOfUser(generics.ListAPIView):
 
 def index(request):
     title = 'Home page'
-    context = {'title': title}
+    names = ['damir', 'nurzhan', 'farhat', 'ivan', 'vladimir', 'elena', 'nikolay']
+    context = {
+        'title': title,
+        'names': names
+    }
     return render(request, 'index.html', context)
 
