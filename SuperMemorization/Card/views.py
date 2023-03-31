@@ -5,7 +5,9 @@ from .serializers import *
 from rest_framework.views import APIView
 from .filters import UsersFitler
 from django_filters import rest_framework as rest_filters
-
+from django.urls import path
+from django.shortcuts import render
+from . import views
 from django_filters.rest_framework import DjangoFilterBackend
 
 class CardAPIView(APIView):
@@ -84,3 +86,9 @@ class DecksOfUser(generics.ListAPIView):
     def get_queryset(self):
         username = self.kwargs['username']
         return User.objects.filter(username=username)
+
+
+def index(request):
+    context = {}
+    return render(request, 'index.html', context)
+
