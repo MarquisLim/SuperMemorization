@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, DecksOfUser, CardDetailAPIView, index
+from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, DecksOfUser, CardDetailAPIView, index, about
 
 urlpatterns = [
     path('', index, name='index'),
+    path('about/', about, name='about'),
     path('admin/', admin.site.urls), # админ панель
     path('card/', CardAPIView.as_view()), # список и создание карточек
     path('deck/', DeckAPIView.as_view()), # список и создание колод
