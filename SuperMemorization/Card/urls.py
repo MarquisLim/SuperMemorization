@@ -1,12 +1,16 @@
-from django.contrib import admin
-from django.urls import path
-from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, DecksOfUser, CardDetailAPIView
+from django.urls import path, include, re_path
+from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard
+from rest_framework_simplejwt import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls), # админ панель
-    path('card/', CardAPIView.as_view()), # список и создание карточек
-    path('deck/', DeckAPIView.as_view()), # список и создание колод
-    path('deck/<int:id>/', DeckDetailAPIView.as_view()), # patch и delete колоды
+    path('cards/', CardAPIView.as_view()),  # список и создание карточек
+    path('decks/', DeckAPIView.as_view()),  # список и создание колод
+    path('deck/<int:id>/', DeckDetailAPIView.as_view()),  # patch и delete колоды
     path('card/<int:id>/', CardDetailAPIView.as_view()),  # patch и delete карточки
-    path('users/decks/cards', DecksOfUser.as_view()), # Список юзеров их колод и карты этих колод
+    path('user/decks/', DecksAPIView.as_view()),
+    path('user/answer/<int:id>', AnswerToCard.as_view()),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path('auth/', include('djoser.urls.authtoken')),
+    path('api/token/', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', views.TokenRefreshView.as_view(), name='token_refresh'),
 ]

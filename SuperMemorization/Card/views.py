@@ -3,16 +3,14 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from rest_framework.views import APIView
-from .filters import UsersFitler
-from django_filters import rest_framework as rest_filters
 
-from django_filters.rest_framework import DjangoFilterBackend
+
 
 class CardAPIView(APIView):
 
     def get(self, request):
         cards = Card.objects.all()
-        serializer = CardSerializer(Card, many=True)
+        serializer = CardSerializer(cards, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -37,13 +35,19 @@ class DeckAPIView(APIView):
 
 class DeckDetailAPIView(APIView):
 
+    def get(self, request, id):
+        deck = Deck.objects.get(id=id)
+        serializer = DeckSerializer(deck)
+        return Response(serializer.data)
+
     def patch(self, request, id):
         deck = Deck.objects.get(id=id)
         data = request.data
-        deck.title = data.get('title', deck.title),
+        deck.title = data.get('title', deck.title)
         deck.description = data.get('description', deck.description)
         deck.save()
-        serializer = DeckSerializer(deck)
+        serializer = DeckSerializer(deck, partial=True)
+
         return Response(serializer.data, status=200)
 
     def delete(self, request, id):
@@ -53,6 +57,10 @@ class DeckDetailAPIView(APIView):
 
 
 class CardDetailAPIView(APIView):
+    def get(self, request, id):
+        card = Card.objects.get(id=id)
+        serializer = CardSerializer(card)
+        return Response(serializer.data)
 
     def patch(self, request, id):
         card = Card.objects.get(id=id)
@@ -71,16 +79,21 @@ class CardDetailAPIView(APIView):
 
 
 
+class DecksAPIView(APIView):
+    def get(self, request):
+        deck = Deck.objects.filter(user_id=request.user.id)
+        print(request.user)
+        serializer = CardsInDeckSerializer(deck, many=True)
+        return Response(serializer.data)
 
-class DecksOfUser(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = DecksOfUserSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ['username', 'decks__title']
-    filterset_class = UsersFitler
 
-    #  filter_backends = [rest_filters.DjangoFilterBackend]
-    # filterset_fields = '__all__'
-    def get_queryset(self):
-        username = self.kwargs['username']
-        return User.objects.filter(username=username)
+class AnswerToCard(APIView):
+    def post(self, request, id):
+        serializer = AnswerToCardSerializer(data=request.data)
+        if serializer.is_valid():
+            mark = serializer.data['mark']
+        card = Card.objects.get(id=id)
+        card.next_review(mark)
+        return Response('ok')
+
+
