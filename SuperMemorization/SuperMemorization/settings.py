@@ -58,7 +58,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'SuperMemorization.urls'
-
+SWAGGER_SETTINGS = {
+   'USE_SESSION_AUTH': False
+}
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
