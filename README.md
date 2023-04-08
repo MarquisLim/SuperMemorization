@@ -5,5 +5,9 @@
 
 после установок всех зависимостей в директории, где расположен файл manage.py прописать следующую команду: 
 
+в директории, где poetry.lock - poetry install
+
+poetry run python manage.py makemigrations
+poetry run python manage.py migrate
 poetry run python manage.py runserver
 
