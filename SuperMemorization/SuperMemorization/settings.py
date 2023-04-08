@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--!b=8^f$zbm6u(ube@7$3)e%+=n4v^n%ys*90+&#4iw=tql%%(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['marquislim2.pythonanywhere.com',]
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'djoser',
     'rest_framework_simplejwt',
-
+    'drf_yasg'
 ]
 ALLOWED_HOSTS = ['*']
 MIDDLEWARE = [
@@ -138,7 +138,7 @@ MEDIA_ROOT = '/home/marquislim2/SuperMemorization/SuperMemorization/media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
