@@ -1,5 +1,5 @@
 from django.urls import path, include, re_path
-from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard
+from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard, RegisterAPIView
 from rest_framework_simplejwt import views
 from django.http import HttpResponse
 
@@ -15,4 +15,5 @@ urlpatterns = [
     re_path('auth/', include('djoser.urls.authtoken')),
     path('api/token/', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/register/', RegisterAPIView.as_view())
 ]

@@ -39,3 +39,15 @@ class CardsInDeckSerializer(serializers.ModelSerializer):
 
 class AnswerToCardSerializer(serializers.Serializer):
     mark = serializers.IntegerField()
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        max_length=128,
+        min_length=8,
+        write_only=True,
+    )
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'password']

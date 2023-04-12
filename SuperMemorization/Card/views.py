@@ -97,3 +97,9 @@ class AnswerToCard(APIView):
         return Response('ok')
 
 
+class RegisterAPIView(APIView):
+    def post(self, request):
+        user = RegisterSerializer(data=request.data)
+        if user.is_valid():
+            user.save()
+        return Response('Юзер создан')
