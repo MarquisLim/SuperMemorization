@@ -12,8 +12,8 @@ urlpatterns = [
     path('api/v1/user/decks/', DecksAPIView.as_view()),
     path('api/v1/user/answer/<int:id>', AnswerToCard.as_view()),
     path('api/v1/auth/', include('djoser.urls')),
+    path('api/v1/register/', RegisterAPIView.as_view()),
     re_path('auth/', include('djoser.urls.authtoken')),
     path('api/token/', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/v1/register/', RegisterAPIView.as_view())
 ]
