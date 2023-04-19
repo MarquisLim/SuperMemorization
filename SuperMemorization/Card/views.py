@@ -103,3 +103,6 @@ class RegisterAPIView(APIView):
         if user.is_valid():
             user.save()
         return Response('Юзер создан')
+
+
+
