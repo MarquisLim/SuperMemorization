@@ -47,7 +47,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=8,
         write_only=True,
     )
-
+    is_staff = serializers.BooleanField(default=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
+        fields = ['id', 'username', 'password', 'is_staff']
