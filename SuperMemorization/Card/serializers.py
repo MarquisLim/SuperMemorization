@@ -47,7 +47,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=8,
         write_only=True,
     )
-    is_staff = serializers.BooleanField(default=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'is_staff']
+        fields = ['id', 'username', 'password']
+
+    def create(self, validated_data):
+        # Использовать метод create_user, который мы
+        # написали ранее, для создания нового пользователя.
+        return User.objects.create_user(**validated_data)
