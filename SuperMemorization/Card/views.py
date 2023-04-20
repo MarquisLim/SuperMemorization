@@ -102,7 +102,7 @@ class RegisterAPIView(APIView):
         user = RegisterSerializer(data=request.data)
         if user.is_valid():
             user.save()
-        return Response('user создан')
+        return Response('user создан', status=201)
 
 
 
