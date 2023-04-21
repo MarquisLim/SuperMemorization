@@ -12,7 +12,7 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
 
     def to_representation(self, instance):
-        if instance.next_review_date >= date.today():
+        if instance.next_review_date <= date.today():
             return super().to_representation(instance)
         return None
 """   def get_image_url(self, obj):
