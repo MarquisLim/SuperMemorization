@@ -3,10 +3,11 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from rest_framework.views import APIView
-
+from rest_framework.parsers import MultiPartParser
 
 
 class CardAPIView(APIView):
+    parser_classes = [MultiPartParser]
 
     def get(self, request):
         cards = Card.objects.all()
