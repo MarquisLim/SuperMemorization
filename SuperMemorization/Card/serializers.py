@@ -34,6 +34,7 @@ class CardSerializer(serializers.ModelSerializer):
     def get_image_url(self, obj):
         request = self.context.get('request')
         if request and obj.image:
+            print(request.build_absolute_uri(obj.image.url))
             return request.build_absolute_uri(obj.image.url)
         return None
 
