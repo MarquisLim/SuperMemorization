@@ -17,7 +17,7 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
         return None
     def get_image_url(self, obj):
         if obj.image:
-            return f'https://marquislim2.pythonanywhere.com/{obj.image}'
+            return f'https://marquislim2.pythonanywhere.com/media/{obj.image}'
         return None
 
 
