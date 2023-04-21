@@ -4,15 +4,19 @@ from datetime import date
 
 
 class CurrentCardSerialzier(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=False)
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Card
-        fields = '__all__'
+        fields = ['front', 'back', 'image_url']
 
     def to_representation(self, instance):
         if instance.next_review_date <= date.today():
             return super().to_representation(instance)
         return None
+
+    def get_image_url(self, obj):
+        return obj.image.url
 
 
 class CardSerializer(serializers.ModelSerializer):
@@ -48,6 +52,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=8,
         write_only=True,
     )
+
     class Meta:
         model = User
         fields = ['id', 'username', 'password']
