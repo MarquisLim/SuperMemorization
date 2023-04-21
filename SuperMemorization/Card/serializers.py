@@ -16,9 +16,8 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
             return super().to_representation(instance)
         return None
     def get_image_url(self, obj):
-        request = self.context.get('request')
-        if request and obj.image:
-            return request.build_absolute_uri(obj.image.url)
+        if obj.image:
+            return f'https://marquislim2.pythonanywhere.com/{obj.image}'
         return None
 
 
