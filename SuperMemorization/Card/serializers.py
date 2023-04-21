@@ -8,7 +8,7 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
     class Meta:
         model = Card
-        fields = ['front', 'back', 'image_url']
+        fields = ['front', 'back', 'image_url', 'deck_id']
 
     def to_representation(self, instance):
         if instance.next_review_date <= date.today():
