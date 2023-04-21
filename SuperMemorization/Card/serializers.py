@@ -4,12 +4,13 @@ from datetime import date
 
 
 class CurrentCardSerialzier(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=False)
     class Meta:
         model = Card
         fields = '__all__'
 
     def to_representation(self, instance):
-        if instance.next_review_date == date.today():
+        if instance.next_review_date <= date.today():
             return super().to_representation(instance)
         return None
 
