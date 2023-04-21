@@ -8,7 +8,7 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
     class Meta:
         model = Card
-        fields = ['front', 'back', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image_url']
+        fields = ['front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date']
 
 
     def to_representation(self, instance):
