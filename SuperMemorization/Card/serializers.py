@@ -24,7 +24,7 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
 
 class CardSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField(default=None)
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Card
