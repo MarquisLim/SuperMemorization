@@ -8,10 +8,14 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
     class Meta:
         model = Card
-        fields = ['front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image']
+        fields = ['front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date',
+                  'image']
 
     def get_image_url(self, obj):
-        return obj.image.url
+        request = self.context.get('request')
+        if request and obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
 
     def to_representation(self, instance):
         if instance.next_review_date <= date.today():
@@ -20,9 +24,18 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
 
 class CardSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField(default=None)
+
     class Meta:
         model = Card
-        fields = '__all__'
+        fields = ['front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date',
+                  'image']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if request and obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
 
 
 class DeckSerializer(serializers.ModelSerializer):
