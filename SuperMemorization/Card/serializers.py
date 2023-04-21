@@ -8,15 +8,15 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
     class Meta:
         model = Card
-        fields = ['front', 'back', 'image_url', 'deck_id']
+        fields = ['front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image']
+
+    def get_image_url(self, obj):
+        return obj.image.url
 
     def to_representation(self, instance):
         if instance.next_review_date <= date.today():
             return super().to_representation(instance)
         return None
-
-    def get_image_url(self, obj):
-        return obj.image.url
 
 
 class CardSerializer(serializers.ModelSerializer):
