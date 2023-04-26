@@ -5,7 +5,7 @@ from datetime import date
 
 class CurrentCardSerialzier(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
-
+    count = serializers.SerializerMethodField()
     class Meta:
         model = Card
         fields = ['id', 'front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date']
@@ -19,6 +19,13 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
         if obj.image:
             return f'https://marquislim2.pythonanywhere.com/media/{obj.image}'
         return None
+
+    def get_count(self, instance):
+        count = 0
+        if instance.next_review_date <= date.today():
+            count += 1
+        return count
+
 
 
 
@@ -36,7 +43,7 @@ class DeckSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Deck
-        fields = ['id', 'title', 'description']
+        fields = ['id', 'title', 'description', 'user_id']
 
 
 class CardsInDeckSerializer(serializers.ModelSerializer):

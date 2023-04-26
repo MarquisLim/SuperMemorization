@@ -20,7 +20,7 @@ class Card(models.Model):
     image = models.ImageField(upload_to='IMG', blank=True)
     last_review_date = models.DateField(default=datetime.now)
     next_review_date = models.DateField(default=datetime.now)
-    deck_id = models.ForeignKey('Deck', on_delete=models.PROTECT, null=True, related_name='cards')
+    deck_id = models.ForeignKey('Deck', on_delete=models.PROTECT, related_name='cards')
 
     def __str__(self):
         return self.front
