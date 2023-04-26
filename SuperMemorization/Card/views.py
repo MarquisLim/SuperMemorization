@@ -83,7 +83,6 @@ class CardDetailAPIView(APIView):
 class DecksAPIView(APIView):
     def get(self, request):
         deck = Deck.objects.filter(user_id=request.user.id)
-        print(request.user)
         serializer = CardsInDeckSerializer(deck, many=True)
         return Response(serializer.data)
 

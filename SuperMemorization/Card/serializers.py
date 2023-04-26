@@ -5,7 +5,7 @@ from datetime import date
 
 class CurrentCardSerialzier(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
-    count = serializers.SerializerMethodField()
+
     class Meta:
         model = Card
         fields = ['id', 'front', 'back', 'image_url', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date']
@@ -20,11 +20,6 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
             return f'https://marquislim2.pythonanywhere.com/media/{obj.image}'
         return None
 
-    def get_count(self, instance):
-        count = 0
-        if instance.next_review_date <= date.today():
-            count += 1
-        return count
 
 
 
@@ -40,10 +35,10 @@ class CardSerializer(serializers.ModelSerializer):
 class DeckSerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=100)
     description = serializers.CharField()
-
     class Meta:
         model = Deck
         fields = ['id', 'title', 'description', 'user_id']
+
 
 
 class CardsInDeckSerializer(serializers.ModelSerializer):
@@ -70,6 +65,5 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'password']
 
     def create(self, validated_data):
-        # Использовать метод create_user, который мы
-        # написали ранее, для создания нового пользователя.
         return User.objects.create_user(**validated_data)
+
