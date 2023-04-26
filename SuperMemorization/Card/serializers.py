@@ -23,6 +23,8 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
 
 
+
+
 class CardSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -33,10 +35,10 @@ class CardSerializer(serializers.ModelSerializer):
 class DeckSerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=100)
     description = serializers.CharField()
-
     class Meta:
         model = Deck
-        fields = ['id', 'title', 'description']
+        fields = ['id', 'title', 'description', 'user_id']
+
 
 
 class CardsInDeckSerializer(serializers.ModelSerializer):
@@ -63,6 +65,5 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'password']
 
     def create(self, validated_data):
-        # Использовать метод create_user, который мы
-        # написали ранее, для создания нового пользователя.
         return User.objects.create_user(**validated_data)
+
