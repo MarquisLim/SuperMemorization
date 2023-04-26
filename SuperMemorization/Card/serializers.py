@@ -27,7 +27,7 @@ class CardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Card
-        fields = ['front', 'back', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image']
+        fields = ['id', 'front', 'back', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image']
 
 
 class DeckSerializer(serializers.ModelSerializer):
