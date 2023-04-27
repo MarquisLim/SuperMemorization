@@ -19,8 +19,8 @@ class CardAPIView(APIView):
         if card.is_valid():
             card.save()
         return Response(status=201)
-    def perform_create(self, deck):
-        card.save(user_id=self.request.user.id)
+#    def perform_create(self, card):
+#        card.save(user_id=self.request.user.id)
 
 class DeckAPIView(APIView):
     def get(self, request):
