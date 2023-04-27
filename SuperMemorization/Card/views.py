@@ -34,8 +34,8 @@ class DeckAPIView(APIView):
             deck.save()
         return Response(status=201)
 
-    def perform_create(self, deck):
-        deck.save(user_id=self.request.user.id)
+    def perform_create(self, serializer):
+        serializer.save(user_id=self.request.user.id)
 
 
 class DeckDetailAPIView(APIView):
