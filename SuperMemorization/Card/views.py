@@ -19,7 +19,8 @@ class CardAPIView(APIView):
         if card.is_valid():
             card.save()
         return Response(status=201)
-
+    def perform_create(self, deck):
+        card.save(user_id=self.request.user.id)
 
 class DeckAPIView(APIView):
     def get(self, request):
@@ -32,6 +33,9 @@ class DeckAPIView(APIView):
         if deck.is_valid():
             deck.save()
         return Response(status=201)
+
+    def perform_create(self, deck):
+        deck.save(user_id=self.request.user.id)
 
 
 class DeckDetailAPIView(APIView):
@@ -79,7 +83,6 @@ class CardDetailAPIView(APIView):
         return Response('Удален')
 
 
-
 class DecksAPIView(APIView):
     def get(self, request):
         deck = Deck.objects.filter(user_id=request.user.id)
@@ -103,6 +106,3 @@ class RegisterAPIView(APIView):
         if user.is_valid():
             user.save()
         return Response(user.data, status=201)
-
-
-
