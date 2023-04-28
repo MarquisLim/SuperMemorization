@@ -33,6 +33,7 @@ class CardSerializer(serializers.ModelSerializer):
 
 
 class DeckSerializer(serializers.ModelSerializer):
+    user_id = serializers.HiddenField(default=serializers.CurrentUserDefault())
     title = serializers.CharField(max_length=100)
     description = serializers.CharField()
     class Meta:
