@@ -1,12 +1,12 @@
 from django.urls import path, include, re_path
-from .views import CardAPIView, DeckAPIView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard, RegisterAPIView
+from .views import CardAPIView, DeckListCreateView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard, RegisterAPIView
 from rest_framework_simplejwt import views
 from django.http import HttpResponse
 
 urlpatterns = [
     path('', lambda request: HttpResponse('Это апи'), name='home'),
     path('api/v1/cards/', CardAPIView.as_view()),  # список и создание карточек
-    path('api/v1/decks/', DeckAPIView.as_view()),  # список и создание колод
+    path('api/v1/decks/', DeckListCreateView.as_view()),  # список и создание колод
     path('api/v1/deck/<int:id>/', DeckDetailAPIView.as_view()),  # patch и delete колоды
     path('api/v1/card/<int:id>/', CardDetailAPIView.as_view()),  # patch и delete карточки
     path('api/v1/user/decks/', DecksAPIView.as_view()),

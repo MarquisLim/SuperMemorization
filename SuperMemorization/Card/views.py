@@ -1,9 +1,11 @@
 from rest_framework import status
 from rest_framework.response import Response
 from .models import *
+from rest_framework.generics import ListCreateAPIView
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser
+from rest_framework.permissions import IsAuthenticated
 
 
 class CardAPIView(APIView):
@@ -22,18 +24,12 @@ class CardAPIView(APIView):
 #    def perform_create(self, card):
 #        card.save(user_id=self.request.user.id)
 
-class DeckAPIView(APIView):
-    def get(self, request):
-        decks = Deck.objects.all()
-        serializer = DeckSerializer(decks, many=True)
-        return Response(serializer.data)
+class DeckListCreateView(ListCreateAPIView):
+    serializer_class = DeckSerializer
+    permission_classes = [IsAuthenticated]
 
-    def post(self, request, format=None):
-        serializer = DeckSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user_id=request.user.id)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_queryset(self):
+        return Deck.objects.filter(user_id=self.request.user.id)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, context={'request': request})
