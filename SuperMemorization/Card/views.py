@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import status
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
@@ -28,14 +28,15 @@ class DeckAPIView(APIView):
         serializer = DeckSerializer(decks, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        deck = DeckSerializer(data=request.data)
-        if deck.is_valid():
-            deck.save()
-        return Response(status=201)
+    def post(self, request, format=None):
+        serializer = DeckSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user_id=request.user.id)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def perform_create(self, serializer):
-        serializer.save(user_id=self.request.auth.user_id)
+        serializer.save(user_id=self.request.user.id)
 
 
 class DeckDetailAPIView(APIView):
