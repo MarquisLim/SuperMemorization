@@ -39,7 +39,7 @@ class DeckListCreateView(ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
-        serializer.save(user_id=self.request.user.id)
+        serializer.save(user_id=self.request.user)
 class DeckDetailAPIView(APIView):
 
     def get(self, request, id):
