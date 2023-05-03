@@ -1,5 +1,5 @@
 from django.urls import path, include, re_path
-from .views import CardAPIView, DeckListCreateView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard, RegisterAPIView
+from .views import CardAPIView, DeckListCreateView, DeckDetailAPIView, CardDetailAPIView, DecksAPIView, AnswerToCard, RegisterAPIView, LogoutAPIView
 from rest_framework_simplejwt import views
 from django.http import HttpResponse
 
@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/v1/user/answer/<int:id>', AnswerToCard.as_view()),
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/register/', RegisterAPIView.as_view()),
+    path('api/v1/logout/', LogoutAPIView.as_view(), name='auth_logout'),
     re_path('auth/', include('djoser.urls.authtoken')),
     path('api/token/', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', views.TokenRefreshView.as_view(), name='token_refresh'),
