@@ -47,7 +47,7 @@ class CardsInDeckSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Deck
-        fields = ['title', 'description' , 'cards']
+        fields = ['id', 'title', 'description', 'cards']
 
 
 class AnswerToCardSerializer(serializers.Serializer):
