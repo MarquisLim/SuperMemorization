@@ -76,7 +76,7 @@ class CardDetailAPIView(APIView):
         card.back = data.get('back', card.back)
         card.image = data.get('image', card.image)
         card.save()
-        serializer = DeckSerializer(card)
+        serializer = CardSerializer(card)
         return Response(serializer.data, status=200)
 
     def delete(self, request, id):
@@ -121,4 +121,5 @@ class LogoutAPIView(APIView):
 
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
             return Response(status=status.HTTP_400_BAD_REQUEST)
