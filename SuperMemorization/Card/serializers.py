@@ -26,12 +26,15 @@ class CurrentCardSerialzier(serializers.ModelSerializer):
 
 
 class  CardSerializer(serializers.ModelSerializer):
-
+    image_url = serializers.SerializerMethodField()
     class Meta:
         model = Card
-        fields = ['id', 'front', 'back', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image']
+        fields = ['id', 'front', 'back', 'deck_id', 'ef', 'interval', 'last_review_date', 'next_review_date', 'image', 'image_url']
 
-
+    def get_image_url(self, obj):
+        if obj.image:
+            return f'https://marquislim2.pythonanywhere.com/media/{obj.image}'
+        return None
 class DeckSerializer(serializers.ModelSerializer):
     user_id = serializers.HiddenField(default=serializers.CurrentUserDefault())
     title = serializers.CharField(max_length=100)
