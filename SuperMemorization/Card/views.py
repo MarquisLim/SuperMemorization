@@ -82,8 +82,8 @@ class CardDetailAPIView(APIView):
         return Response(serializer.data, status=200)
 
     def delete(self, request, id):
-        deck = Deck.objects.get(id=id)
-        deck.delete()
+        card = Card.objects.get(id=id)
+        card.delete()
         return Response('Удален')
 
 
