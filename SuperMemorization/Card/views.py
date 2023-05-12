@@ -19,8 +19,10 @@ class CardAPIView(APIView):
     def post(self, request):
         card = CardSerializer(data=request.data)
         if card.is_valid():
-            card.save()
-        return Response(card.data, status=201)
+            instance = card.save()
+            serialized_data = CardSerializer(instance).data
+
+        return Response(serialized_data, status=201)
 #    def perform_create(self, card):
 #        card.save(user_id=self.request.user.id)
 
