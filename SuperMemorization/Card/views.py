@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class CardAPIView(APIView):
-    parser_classes = [MultiPartParser]
+   # parser_classes = [MultiPartParser]
 
     def get(self, request):
         cards = Card.objects.all()

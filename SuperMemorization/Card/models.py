@@ -22,8 +22,8 @@ class Card(models.Model):
     ef = models.FloatField(default=2.5)
     interval = models.IntegerField(default=1)
     image = models.ImageField(upload_to='IMG', blank=True, verbose_name='Изображение')
-    last_review_date = models.DateField(default=datetime.now, verbose_name='Последняя дата провверки')
-    next_review_date = models.DateField(default=datetime.now, verbose_name='Следующая дата проверки')
+    last_review_date = models.DateField(default=datetime.now().date, verbose_name='Последняя дата провверки')
+    next_review_date = models.DateField(default=datetime.now().date, verbose_name='Следующая дата проверки')
     deck_id = models.ForeignKey('Deck', on_delete=models.CASCADE, related_name='cards')
 
     def __str__(self):
