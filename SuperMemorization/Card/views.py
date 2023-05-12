@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class CardAPIView(APIView):
-   parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser]
 
     def get(self, request):
         cards = Card.objects.all()
@@ -19,8 +19,10 @@ class CardAPIView(APIView):
     def post(self, request):
         card = CardSerializer(data=request.data)
         if card.is_valid():
-            card.save()
-        return Response(card.data, status=201)
+            instance = card.save()
+            serialized_data = CardSerializer(instance).data
+
+        return Response(serialized_data, status=201)
 #    def perform_create(self, card):
 #        card.save(user_id=self.request.user.id)
 
