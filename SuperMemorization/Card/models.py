@@ -4,22 +4,26 @@ from django.contrib.auth.models import User
 
 
 class Deck(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
+    title = models.CharField(max_length=255, verbose_name='Название')
+    description = models.TextField(blank=True, verbose_name='Описание')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='decks')
 
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Колода'
+        verbose_name_plural = 'Колоды'
+
 
 class Card(models.Model):
-    front = models.CharField(max_length=100)
-    back = models.CharField(max_length=200)
+    front = models.CharField(max_length=100, verbose_name='Термин')
+    back = models.CharField(max_length=200, verbose_name='Определение')
     ef = models.FloatField(default=2.5)
     interval = models.IntegerField(default=1)
-    image = models.ImageField(upload_to='IMG', blank=True)
-    last_review_date = models.DateField(default=datetime.now)
-    next_review_date = models.DateField(default=datetime.now)
+    image = models.ImageField(upload_to='IMG', blank=True, verbose_name='Изображение')
+    last_review_date = models.DateField(default=datetime.now, verbose_name='Последняя дата провверки')
+    next_review_date = models.DateField(default=datetime.now, verbose_name='Следующая дата проверки')
     deck_id = models.ForeignKey('Deck', on_delete=models.CASCADE, related_name='cards')
 
     def __str__(self):
@@ -39,3 +43,8 @@ class Card(models.Model):
             self.next_review_date = self.last_review_date + timedelta(days=self.interval) * self.ef
         self.last_review_date = datetime.now()
         self.save()
+
+    class Meta:
+        verbose_name = 'Карточка'
+        verbose_name_plural = 'Карточки'
+
